@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trato y reuso de las bolsas de basura</title>
+    <style>
+        /* Estilos globales */
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Contenedor principal */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        /* Estilos de sección */
+        section {
+            margin: 20px 0;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            font-size: 2em;
+            color: #185a9d;
+            border-bottom: 2px solid #43cea2;
+            padding-bottom: 10px;
+        }
+
+        section p {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .intro-image, .conclusion-image {
+            width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        /* Botón Toggle */
+        .btn-toggle {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 0;
+            background-color: #43cea2;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            border-radius: 5px;
+        }
+
+        .btn-toggle:hover {
+            background-color: #38a47c;
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Tabla */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #43cea2;
+            color: white;
+        }
+
+        /* Galería de imágenes */
+        .image-gallery {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .image-gallery img {
+            width: 32%;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border-radius: 8px;
+        }
+
+        .image-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Estilo de la conclusión */
+        .conclusion {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #43cea2;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Popup */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: white;
+            border: 2px solid #43cea2;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            display: none;
+            border-radius: 8px;
+        }
+
+        .popup img {
+            width: 100%;
+            height: auto;
+        }
+
+        .popup .close-btn {
+            display: block;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .popup .close-btn button {
+            background-color: #43cea2;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .popup .close-btn button:hover {
+            background-color: #38a47c;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        section {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .image-gallery img {
+            animation: slideIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Trato y reuso de las bolsas de basura</h1>
+    </header>
+    <div class="container">
+        <section>
+            <h2>Introducción</h2>
+            <img src="https://www.wikihow.com/images_en/thumb/f/fd/Recycle-Old-Plastic-Bags-Step-4-Version-3.jpg/v4-460px-Recycle-Old-Plastic-Bags-Step-4-Version-3.jpg.webp" alt="Introducción sobre bolsas de basura" class="intro-image">
+            <p>El manejo adecuado de las bolsas de basura es esencial para una gestión eficiente de los residuos y la protección del medio ambiente. A medida que la cantidad de desechos generados por la sociedad aumenta, también lo hace la necesidad de abordar los problemas asociados con el uso excesivo de bolsas de plástico. Estas bolsas, si no se gestionan correctamente, pueden causar daños significativos a los ecosistemas, obstruir sistemas de drenaje y contribuir a la contaminación. Por lo tanto, es crucial implementar prácticas sostenibles que fomenten el trato y reuso de las bolsas de basura.</p>
+            <button class="btn-toggle" onclick="toggleSection('more-info')">Cuidemos el medio ambiente</button>
+            <div id="more-info" class="hidden">
+                <p>Las bolsas de basura, hechas principalmente de plástico, representan un problema significativo cuando no se manejan correctamente. En Querétaro, se han desarrollado programas de educación ambiental para concienciar a la población sobre la importancia del reciclaje y reuso de estas bolsas. Estas iniciativas no solo buscan reducir la cantidad de residuos, sino también promover una economía circular que beneficie al medio ambiente y a la sociedad en su conjunto.</p>
+            </div>
+            </div>
+        </section>
+        <section>
+            <h2>Importancia del reuso de las bolsas de basura</h2>
+                    <p>Reutilizar las bolsas de basura no solo reduce la contaminación, sino que también ayuda a conservar recursos naturales. Las bolsas de plástico tardan cientos de años en degradarse, liberando toxinas que pueden contaminar el suelo y el agua.</p>
+            <div class="image-gallery">
+                <img src="https://cdn0.ecologiaverde.com/es/posts/6/6/0/cuales_son_los_beneficios_de_reciclar_66_600.jpg" alt="Imagen de bolsas de basura reutilizadas" onclick="openPopup(this.src)">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVy29M9hOhGsPjKfvRzVnF8XQg-vTUbCujXNntQ9ODag&s" alt="Proceso de reciclaje de bolsas de plástico" onclick="openPopup(this.src)">
+                <img src="https://media.gq.com.mx/photos/5cf6eceb4dc08815189af587/1:1/w_1413,h_1413,c_limit/GettyImages-938891376.jpg" alt="Campaña de reuso de bolsas en Querétaro" onclick="openPopup(this.src)">
+            </div>
+        </section>
+        <section>
+            <h2>Soluciones a la problemática</h2>
+            <p>Para abordar el problema del manejo de bolsas de basura, es esencial optar por bolsas biodegradables o compostables, seleccionar tamaños adecuados, y segregar los residuos en origen. Es importante no sobrecargar las bolsas y reutilizarlas cuando sea posible, lavando y reusando las más resistentes para residuos menos contaminantes o dándoles un uso alternativo. Además, se debe asegurar una disposición final responsable, reciclando las bolsas plásticas y compostando las biodegradables.</p>
+        <section>
+            <h2>Datos y cifras importantes en Querétaro</h2>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvjSQJrcbMzKXAj6USNaud9Jgg96Nk6mC8jMSfYnOEo5tsdy0uDQ9ZVQHWQJr6YgbQ8Fo&usqp=CAU" alt="Datos y cifras importantes">
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Dato</th>
+                        <th>Cifra</th>
+                    </tr>
+                    <tr>
+                        <td>Producción anual de residuos plásticos</td>
+                        <td>45,000 toneladas</td>
+                    </tr>
+                    <tr>
+                        <td>Porcentaje de bolsas de plástico reutilizadas</td>
+                        <td>15%</td>
+                    </tr>
+                    <tr>
+                        <td>Campañas de concientización realizadas en 2023</td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td>Centros de acopio de plástico en el estado</td>
+                        <td>8</td>
+                    </tr>
+                    <tr>
+                        <td>Reducción de residuos plásticos en vertederos</td>
+                        <td>10
+                        </table>
+                    </div>
+                </section>
+                <section class="conclusion">
+                    <h2>Conclusiones</h2>
+                    <img src="https://www.gaceta.unam.mx/wp-content/uploads/2022/07/220725-Aca5-des-f1-separacion-residuos.jpg" alt="Conclusiones sobre el trato y reuso de bolsas de basura" class="conclusion-image">
+                    <p>El trato y reuso de las bolsas de basura es un componente esencial en la gestión de residuos en Querétaro. A través de campañas de concientización, mejoras en el reciclaje y el establecimiento de centros de acopio, se ha logrado reducir significativamente la cantidad de plástico que llega a los vertederos. Es fundamental continuar con estas iniciativas y fomentar una mayor participación de la comunidad para alcanzar un desarrollo sostenible.</p>
+                </section>
+            </div>
+            <section class="credits">
+                <h2>Elaborado por:</h2>
+                <ul>
+                    <li>Gael Antonio Arroyo Camacho</li>
+                    <li>Santiago Jiménez Blando</li>
+                    <li>César Giovanni Morales Olvera</li>
+                    <li>Mario Iván Velázquez Álvarez</li>
+                    <li>Giovanni Alejandro Luna Martínez</li>
+                    <li>Sebastián López Arias</li>
+                    <li>Contacto: (gaelarroyo3@cecyteq.edu.mx)</li>
+                </ul>
+            </section>
+            <section class="Fuente:">
+                <h2>Fuentes:</h2>
+                <ul>
+                    <li>UNAM (2017) https://investigacion.fca.unam.mx/docs/memorias/2017/4.15.pdf</li>
+
+                </ul>
+            </section>
+            <footer>
+                <p>&copy; 2024 Trato y reuso de las bolsas de basura - Querétaro</p>
+            </footer>
+        
+            <div class="popup" id="popup">
+                <div class="close-btn">
+                    <button onclick="closePopup()">Cerrar</button>
+                </div>
+                <img src="" alt="Popup Image" id="popup-img">
+            </div>
+        
+            <script>
+                function toggleSection(id) {
+                    const element = document.getElementById(id);
+                    if (element.classList.contains('hidden')) {
+                        element.classList.remove('hidden');
+                    } else {
+                        element.classList.add('hidden');
+                    }
+                }
+        
+                function openPopup(src) {
+                    const popup = document.getElementById('popup');
+                    const popupImg = document.getElementById('popup-img');
+                    popupImg.src = src;
+                    popup.style.display = 'block';
+                }
+
+
+
+
+
